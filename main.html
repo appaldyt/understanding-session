@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami session client Side</title>
+</head>
+<body>
+    <h1>Apa itu object localStrorage?</h1>
+    <h2>Yang berfungsi sebagai client side session</h2>
+    <hr/>
+    Namamu = <span id="nama">Akan digantikan dengan isi variabel nama</span>
+    <hr/>
+
+    Input nama <input id="inputNama"/><button id="btnSimpanNama">Simpan</button>
+
+    <hr/>
+    <h1>Mengenal OOP</h1>
+    <h2>Cara perogramer mmemecahkan permasalahan ke dalam class-class yy terdiri dari fungsi dan data</h2>
+    <hr/>
+    Input nama <input id="inputNamaArray"/><br/>
+    Input sex <input id="inputSexArray"/><br/>
+    <button id="btnSimpanNamaArray">Buat Manusia Baru</button>
+
+    <script>
+        let nama = localStorage.getItem("nama") || "Untitled"; //Mengambil value nama di localStorage brouser
+        let daftarNama = []; //list atau array yg diberi daftar
+        let daftarSex = []; //list atau array yg diberi daftar
+
+        //Membuat class
+        //Manusia adalah class (blueprint/cetakan), yang itu tidak ada didunia, manusia hanya konsep.
+        //Yang real, yang ada, yang nyata adalah: eko, joko, bowo.
+        //Mereka disebut dengan instance/object/variabel, dan mereka dirifer dengan this.
+        //Kalau di python self.
+
+        class Manusia{
+            constructor(nama, sex) {
+                this.nama = nama;
+                this.sex = sex;
+            }
+        }
+
+        function setNama(nilaiNama) {
+            document.getElementById("nama").innerText = nilaiNama;
+            localStorage.setItem("nama", nilaiNama) //Melakukan setting nilai di localStrorage nama : nilaiNama
+        }
+
+        setNama(nama);
+
+        document.getElementById("btnSimpanNamaArray").addEventListener("click", function(){
+            // console.log("Bottom Click"); //Bermanfaat untuk melakukan debuging
+            let inputNamaArray = document.getElementById("inputNamaArray").value;
+            let inputSexArry = document.getElementById("inputSexArray").value;
+            let manusia = new Manusia(inputNamaArray, inputSexArry);
+            // setNama(inputNama) //Memasukan value hasil input & ditampilkan ke namamu
+
+            daftarNama.push(manusia);
+            document.getElementById("inputNamaArray").value = ""; //Mengkosongkan kembali data
+            document.getElementById("inputSexArray").value = "";
+            console.log(daftarNama);
+        });
+
+        //Ketika nanti di server side, yang akan di simpan adalah cookisnya.
+        //Sedangkan untuk contoh ini Value di localStorage bertindak sebagai cookis agar browser mengingat kita
+    </script>
+    
+</body>
+</html>
